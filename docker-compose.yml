@@ -84,7 +84,7 @@ services:
   content-server:
     image: decentraland/katalyst:${DOCKER_TAG:-latest}
     working_dir: /app
-    command: content
+    entrypoint: ["/bin/sh", "-c", "node --inspect=0.0.0.0:9229 content/entrypoints/run-server.js"]
     environment:
       - CONTENT_SERVER_ADDRESS=${CATALYST_URL}/content/
       - STORAGE_ROOT_FOLDER=/app/storage/content_server/
@@ -99,6 +99,8 @@ services:
       - postgres
     expose:
       - "6969"
+    ports:
+      - "9229:9229"
     restart: always
     volumes:
       - "${CONTENT_SERVER_STORAGE}:/app/storage/content_server/"
