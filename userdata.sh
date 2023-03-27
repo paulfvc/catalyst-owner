@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export DEBIAN_FRONTEND=noninteractive
+
 set -x
 set -v # verbose
 set -u # no unbound variables
