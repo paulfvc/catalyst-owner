@@ -42,10 +42,12 @@ services:
       - CONTENT_URL=${CATALYST_URL}/content/
       - BFF_PUBLIC_URL=/bff
       - HEALTHCHECK_LAMBDAS_URL=http://lambdas:7070
+      - HEALTHCHECK_LAMB2_URL=http://lamb2:7272
       - HEALTHCHECK_CONTENT_URL=http://content-server:6969
       - COMMS_MODE=archipelago
       - STORAGE_LOCATION=/app/storage
       - REALM_NAMES=${LIGHTHOUSE_NAMES}
+      - MAX_USERS=${MAX_USERS:-400}
     restart: always
     expose:
       - "3000"
@@ -82,6 +84,8 @@ services:
       - .env-advanced
     environment:
       - "NATS_URL=nats://nats:4222"
+    expose:
+      - "5000"
     restart: always
     logging:
       driver: syslog
